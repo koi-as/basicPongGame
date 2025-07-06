@@ -71,6 +71,11 @@ const ctx = canvas.getContext('2d');
 let tileCount = 50;
 let tileSize = canvas.width / tileCount - 1;
 
+// background variables
+let customGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+customGradient.addColorStop(0, 'white');
+customGradient.addColorStop(1, 'lightblue');
+
 function drawGame() {
     clearScreen();
 
@@ -87,7 +92,8 @@ function drawGame() {
 }
 
 function clearScreen() {
-    // 
+    ctx.fillStyle = customGradient;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 };
 
 function checkCollision() {
