@@ -76,6 +76,13 @@ let customGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
 customGradient.addColorStop(0, 'white');
 customGradient.addColorStop(1, 'lightblue');
 
+// ball stuff
+let ballX = 5;
+let ballY = 5;
+
+let ballVelocityX = 0;
+let ballVelocityY = 0;
+
 function drawGame() {
     clearScreen();
 
@@ -101,7 +108,8 @@ function checkCollision() {
 };
 
 function drawBall() {
-
+    ctx.fillStyle = 'black';
+    ctx.fillRect(ballX * tileCount, ballY * tileCount, tileSize, tileSize);
 };
 
 function drawPaddles() {
