@@ -55,7 +55,7 @@ let ballLocation = 0;
 
 // functions
 /*
-playGame();
+drawGame();
 endGame();
 resetGame();
 drawBall();
@@ -63,9 +63,55 @@ drawPaddles();
 drawScore(); maybe combine this with a different function?
 */
 
+// pull canvas information from html
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
 
+function drawGame() {
+    clearScreen();
 
+    // check collisions of ball into walls or paddle
+    checkCollision();
 
+    // draw game elements
+    drawBall();
+    drawPaddles();
+    drawScore();
+
+    // redraw game every .1 seconds
+    setTimeout(drawGame, 100);
+}
+
+function clearScreen() {
+    // 
+};
+
+function checkCollision() {
+
+};
+
+function drawBall() {
+
+};
+
+function drawPaddles() {
+
+};
+
+function drawScore() {
+
+};
+
+function keyDown() {
+    // up key is code 38
+    // down key is code 40
+
+    // w key is code 87
+    // s key is code 83
+};
+
+// drawGame as master function
+drawGame();
 
 // What other game elements should I consider?
 // Start game/restart game buttons. This would be nice when playing with friends, so CHECK
