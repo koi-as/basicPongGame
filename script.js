@@ -67,6 +67,10 @@ drawScore(); maybe combine this with a different function?
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
 
+// map variables
+let tileCount = 50;
+let tileSize = canvas.width / tileCount - 1;
+
 function drawGame() {
     clearScreen();
 
