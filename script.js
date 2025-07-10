@@ -111,6 +111,11 @@ function clearScreen() {
 };
 
 function checkCollision() {
+    // ball hits walls
+    if(ballY === 0 || ballY === 50) {
+        ballVelocityY * -1;
+    }
+
     // left player collisions
     // ball hits left paddle
     if(ballX === lPaddleX && ballY === lPaddleY) {
