@@ -87,6 +87,8 @@ let lPaddleX = 1;
 let lPaddleY = 4;
 
 let player2Velocity = 0;
+let rPaddleX = 9;
+let rPaddleY = 4;
 
 function drawGame() {
     clearScreen();
@@ -120,6 +122,9 @@ function drawBall() {
 function drawPaddles() {
     ctx.fillStyle = 'black';
     ctx.fillRect(lPaddleX * tileCount, lPaddleY * tileCount, tileSize, tileSize * 11)
+
+    ctx.fillStyle = 'black';
+    ctx.fillRect(rPaddleX * tileCount, rPaddleY * tileCount, tileSize, tileSize * 11)
 };
 
 function drawScore() {
