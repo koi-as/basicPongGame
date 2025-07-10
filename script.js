@@ -91,6 +91,10 @@ let rPaddleX = 9;
 let rPaddleY = 4;
 
 function drawGame() {
+    // function for players to move paddles
+    changePaddlePosition();
+
+    // sets background of canvas
     clearScreen();
 
     // check collisions of ball into walls or paddle
@@ -103,6 +107,12 @@ function drawGame() {
 
     // redraw game every .1 seconds
     setTimeout(drawGame, 100);
+}
+
+function changePaddlePosition() {
+    lPaddleY = lPaddleY + player1Velocity;
+
+    rPaddleY = rPaddleY + player2Velocity;
 }
 
 function clearScreen() {
