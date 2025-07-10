@@ -31,33 +31,20 @@
 
 // left player vars
 /*
-let paddleLeft = "":
-let paddleLeftVelocity = 0;
 let playerLeft = "";
 let scoreLeft = 0;
 */
 
 // right player vars
 /*
-let paddleRight = "";
-let paddleRightVelocity = "";
 let playerRight = "";
 let scoreRight = 0;
 */
 
-// ball vars
-/*
-let ball = "";
-let ballLocation = 0;
-*/
-
 // functions
 /*
-drawGame();
 endGame();
 resetGame();
-drawBall();
-drawPaddles();
 drawScore(); maybe combine this with a different function?
 */
 
@@ -73,6 +60,10 @@ let tileSize = canvas.width / tileCount;
 let customGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
 customGradient.addColorStop(0, 'white');
 customGradient.addColorStop(1, 'lightblue');
+
+// score variables
+let lPlayerScore = 0;
+let rPlayerScore = 0;
 
 // ball stuff
 let ballX = 5;
@@ -111,7 +102,6 @@ function drawGame() {
 
 function changePaddlePosition() {
     lPaddleY = lPaddleY + lPlayerVelocity;
-
     rPaddleY = rPaddleY + rPlayerVelocity;
 }
 
@@ -121,7 +111,28 @@ function clearScreen() {
 };
 
 function checkCollision() {
+    // left player collisions
+    // ball hits left paddle
+    if(ballX === lPaddleX && ballY === lPaddleY) {
+        ballVelocityX = 1;
+    }
+    // left player scores
+    if(ballX === 50) {
+        // set ball back to center screen
+        // launch ball towards right player
+        lPlayerScore++;
+    } 
 
+    // ball hits right paddle
+    if(ballX === rPaddleX && ballY === rPaddleY) {
+        ballVelocityX = -1;
+    }
+    // right player scores
+    if(ballX === 0) {
+        // set ball back to center screen
+        // launch ball towards left player
+        rPlayerScore++
+    }
 };
 
 function drawBall() {
@@ -144,15 +155,15 @@ function drawScore() {
 function keyDown() {
     // left player keys (player 1)
     // up key for player 1
-    if(event.keyCode === 87) {
-        if(lPlayerVelocity === 1) {
+    if (event.keyCode === 87) {
+        if (lPlayerVelocity === 1) {
             return;
         }
         lPlayerVelocity = -1;
     }
     // down key for player 1
     if (event.keyCode === 83) {
-        if(lPlayerVelocity === -1) {
+        if (lPlayerVelocity === -1) {
             return;
         }
         lPlayerVelocity = 1;
@@ -160,15 +171,15 @@ function keyDown() {
 
     // right player keys (player 2)
     // up key for player 2
-    if(event.keyCode === 38) {
-        if(rPlayerVelocity === 1) {
+    if (event.keyCode === 38) {
+        if (rPlayerVelocity === 1) {
             return;
         }
         rPlayerVelocity = -1;
     }
     // down key for player 2
     if (event.keyCode === 40) {
-        if(rPlayerVelocity === -1) {
+        if (rPlayerVelocity === -1) {
             return;
         }
         rPlayerVelocity = 1;
