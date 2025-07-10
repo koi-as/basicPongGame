@@ -67,7 +67,7 @@ const ctx = canvas.getContext('2d');
 
 // map variables
 let tileCount = 50;
-let tileSize = canvas.width / tileCount - 1;
+let tileSize = canvas.width / tileCount;
 
 // background variables
 let customGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
@@ -83,7 +83,8 @@ let ballVelocityY = 0;
 
 // player 1 variables
 let player1Velocity = 0;
-
+let lPaddleX = 1;
+let lPaddleY = 4;
 
 let player2Velocity = 0;
 
@@ -117,7 +118,8 @@ function drawBall() {
 };
 
 function drawPaddles() {
-
+    ctx.fillStyle = 'black';
+    ctx.fillRect(lPaddleX * tileCount, lPaddleY * tileCount, tileSize, tileSize * 11)
 };
 
 function drawScore() {
