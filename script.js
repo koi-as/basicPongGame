@@ -48,8 +48,6 @@ let scoreRight = 0;
 // ball vars
 /*
 let ball = "";
-let ballVelocityX = 0;
-let ballVelocityY = 0;
 let ballLocation = 0;
 */
 
@@ -82,6 +80,12 @@ let ballY = 5;
 
 let ballVelocityX = 0;
 let ballVelocityY = 0;
+
+// player 1 variables
+let player1Velocity = 0;
+
+
+let player2Velocity = 0;
 
 function drawGame() {
     clearScreen();
@@ -121,11 +125,37 @@ function drawScore() {
 };
 
 function keyDown() {
-    // up key is code 38
-    // down key is code 40
+    // left player keys (player 1)
+    // up key for player 1
+    if(event.keyCode === 87) {
+        if(player2Velocity === 1) {
+            return;
+        }
+        player2Velocity = -1;
+    }
+    // down key for player 1
+    if (event.keyCode === 83) {
+        if(player2Velocity === -1) {
+            return;
+        }
+        player2Velocity = 1;
+    }
 
-    // w key is code 87
-    // s key is code 83
+    // right player keys (player 2)
+    // up key for player 2
+    if(event.keyCode === 38) {
+        if(player2Velocity === 1) {
+            return;
+        }
+        player2Velocity = -1;
+    }
+    // down key for player 2
+    if (event.keyCode === 40) {
+        if(player2Velocity === -1) {
+            return;
+        }
+        player2Velocity = 1;
+    }
 };
 
 // drawGame as master function
