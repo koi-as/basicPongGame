@@ -82,11 +82,11 @@ let ballVelocityX = 0;
 let ballVelocityY = 0;
 
 // player 1 variables
-let player1Velocity = 0;
+let lPlayerVelocity = 0;
 let lPaddleX = 1;
 let lPaddleY = 4;
 
-let player2Velocity = 0;
+let rPlayerVelocity = 0;
 let rPaddleX = 9;
 let rPaddleY = 4;
 
@@ -110,9 +110,9 @@ function drawGame() {
 }
 
 function changePaddlePosition() {
-    lPaddleY = lPaddleY + player1Velocity;
+    lPaddleY = lPaddleY + lPlayerVelocity;
 
-    rPaddleY = rPaddleY + player2Velocity;
+    rPaddleY = rPaddleY + rPlayerVelocity;
 }
 
 function clearScreen() {
@@ -145,33 +145,33 @@ function keyDown() {
     // left player keys (player 1)
     // up key for player 1
     if(event.keyCode === 87) {
-        if(player2Velocity === 1) {
+        if(lPlayerVelocity === 1) {
             return;
         }
-        player2Velocity = -1;
+        lPlayerVelocity = -1;
     }
     // down key for player 1
     if (event.keyCode === 83) {
-        if(player2Velocity === -1) {
+        if(lPlayerVelocity === -1) {
             return;
         }
-        player2Velocity = 1;
+        lPlayerVelocity = 1;
     }
 
     // right player keys (player 2)
     // up key for player 2
     if(event.keyCode === 38) {
-        if(player2Velocity === 1) {
+        if(rPlayerVelocity === 1) {
             return;
         }
-        player2Velocity = -1;
+        rPlayerVelocity = -1;
     }
     // down key for player 2
     if (event.keyCode === 40) {
-        if(player2Velocity === -1) {
+        if(rPlayerVelocity === -1) {
             return;
         }
-        player2Velocity = 1;
+        rPlayerVelocity = 1;
     }
 };
 
