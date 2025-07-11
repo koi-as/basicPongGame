@@ -110,7 +110,7 @@ function clearScreen() {
 
 function checkCollision() {
     // ball hits walls
-    if(ballY === 0 || ballY === 50) {
+    if(ballY === 0 || ballY === 10) {
         ballVelocityY * -1;
     }
 
@@ -120,9 +120,11 @@ function checkCollision() {
         ballVelocityX = 1;
     }
     // left paddle hits walls
-    if(lPaddleY === 0) {
-        lPlayerVelocity = 0
-    } else if(lPaddleY === 8) {
+    if(lPaddleY < 0) {
+        lPaddleY = 0;
+        lPlayerVelocity = 0;
+    } else if(lPaddleY >= 8) {
+        lPaddleY = 8;
         lPlayerVelocity = 0;
     }
     // left player scores
