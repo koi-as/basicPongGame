@@ -70,7 +70,7 @@ let ballY = 5;
 let ballVelocityX = 0;
 let ballVelocityY = 0;
 
-// player 1 variables
+// player variables
 let lPlayerVelocity = 0;
 let lPaddleX = 1;
 let lPaddleY = 4;
@@ -79,9 +79,18 @@ let rPlayerVelocity = 0;
 let rPaddleX = 9;
 let rPaddleY = 4;
 
+// defaults gameOver state to false
+let gameOver = false;
+
 function drawGame() {
     // function for players to move paddles
     changePaddlePosition();
+
+    // checks to see if game is over; ends function if it is game over
+    let result = endGame();
+    if(result) {
+        return;
+    }
 
     // sets background of canvas
     clearScreen();
@@ -101,6 +110,37 @@ function drawGame() {
 function changePaddlePosition() {
     lPaddleY = lPaddleY + lPlayerVelocity;
     rPaddleY = rPaddleY + rPlayerVelocity;
+}
+
+function endGame() {
+    let winner = '';
+    // checks to see if the game has started yet
+    if(lPlayerScore === 0 && rPlayerScore === 0) {
+        return false;
+    }
+
+    // check if a player has reached 7 points
+    if(lPlayerScore === 7) {
+        // lPlayer win screen
+        winner = 'Player 1';
+        gameOver = true;
+    }
+
+    if(rPlayerScore === 7) {
+        // rPlayer win screen
+        winner = 'Player 2';
+        gameOver = true;
+    }
+
+    if(gameOver) {
+        ctx.fillStyle = 'black';
+        ctx.font = '50px "Lucida Console"';
+        let winnerMessage = winner + ' wins!';
+        let winnerMessageWidth = ctx.measureText(winnerMessage).width
+        ctx.fillText(winnerMessage, (canvas.width / 2) - (winnerMessageWidth / 2), canvas.height / 2);
+    }
+
+    return gameOver;
 }
 
 function clearScreen() {
