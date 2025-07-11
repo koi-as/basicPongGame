@@ -170,7 +170,8 @@ function checkCollision() {
     }
     // right player scores
     if (ballX < 0) {
-        // set ball back to center screen
+        ballX === 250;
+        ballY === 250;
         // launch ball towards left player
         rPlayerScore++
     }
