@@ -138,6 +138,12 @@ function checkCollision() {
     if(ballX === rPaddleX && ballY === rPaddleY) {
         ballVelocityX = -1;
     }
+    // left paddle hits walls
+    if(rPaddleY === 0) {
+        rPlayerVelocity = 0
+    } else if(rPaddleY === 8) {
+        rPlayerVelocity = 0;
+    }
     // right player scores
     if(ballX === 0) {
         // set ball back to center screen
