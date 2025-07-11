@@ -32,13 +32,11 @@
 // left player vars
 /*
 let playerLeft = "";
-let scoreLeft = 0;
 */
 
 // right player vars
 /*
 let playerRight = "";
-let scoreRight = 0;
 */
 
 // functions
@@ -166,13 +164,16 @@ function drawPaddles() {
 };
 
 function drawScore() {
-
+    ctx.fillStyle = 'black';
+    ctx.font = '30px "Lucida Console"';
+    let scoreboard = lPlayerScore + ' | ' + rPlayerScore;
+    let scoreboardWidth = ctx.measureText(scoreboard).width;
+    ctx.fillText(scoreboard, (canvas.width / 2) - (scoreboardWidth / 2), 30);
 };
 
 document.body.addEventListener('keydown', keyDown);
 
 function keyDown() {
-    console.log('working?');
     // left player keys (player 1)
     // up key for player 1
     if (event.keyCode === 87) {
