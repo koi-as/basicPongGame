@@ -43,9 +43,10 @@ let rPlayerScore = 0;
 // ball stuff
 let ballX = 250;
 let ballY = 250;
+let radius = 7;
 
-let ballVelocityX = 0;
-let ballVelocityY = 0;
+let ballVelocityX = 9;
+let ballVelocityY = 3;
 
 // player variables
 let lPlayerVelocity = 0;
@@ -77,6 +78,7 @@ function drawGame() {
 
     // draw game elements
     drawBall();
+    // animate() // animate ball
     drawPaddles();
     drawScore();
 
@@ -128,14 +130,16 @@ function clearScreen() {
 
 function checkCollision() {
     // ball hits walls
-    if (ballY === 0 || ballY === 10) {
-        ballVelocityY * -1;
+    // if (ballX + radius > canvas.width || ballX - radius < 0) {
+    //     ballVelocityX = -ballVelocityX; 
+    if (ballY + radius > canvas.height || ballY - radius < 0) {
+        ballVelocityY = -ballVelocityY;
     }
 
     // left player collisions
     // ball hits left paddle
     if (ballX === lPaddleX && ballY === lPaddleY) {
-        ballVelocityX = 1;
+        ballVelocityX = -ballVelocityX;
     }
     // left paddle hits walls
     if (lPaddleY < 0) {
@@ -146,7 +150,7 @@ function checkCollision() {
         lPlayerVelocity = 0;
     }
     // left player scores
-    if (ballX === 50) {
+    if (ballX > canvas.width) {
         // set ball back to center screen
         // launch ball towards right player
         lPlayerScore++;
@@ -154,7 +158,7 @@ function checkCollision() {
 
     // ball hits right paddle
     if (ballX === rPaddleX && ballY === rPaddleY) {
-        ballVelocityX = -1;
+        ballVelocityX = -ballVelocityX;
     }
     // left paddle hits walls
     if (rPaddleY < 0) {
@@ -165,7 +169,7 @@ function checkCollision() {
         rPlayerVelocity = 0;
     }
     // right player scores
-    if (ballX === 0) {
+    if (ballX < 0) {
         // set ball back to center screen
         // launch ball towards left player
         rPlayerScore++
@@ -180,7 +184,24 @@ function drawBall() {
     ctx.arc(ballX, ballY, 7, 0, 2 * Math.PI, false);
     ctx.fillStyle = 'black'
     ctx.fill()
+
+    // moves ball according to velocity
+    ballX = ballX + ballVelocityX;
+    ballY = ballY + ballVelocityY;
 };
+
+
+const animate = () => {
+
+
+    drawBall(ballX, ballY);
+    ballX = ballX + ballVelocityX;
+    ballY = ballY + ballVelocityY;
+    requestAnimationFrame(animate);
+}
+
+
+
 
 function drawPaddles() {
     // draws the left player paddle onto the canvas
@@ -226,54 +247,10 @@ function keyDown() {
 };
 
 // drawGame as master function
-// drawGame();
+drawGame();
 
 // What other game elements should I consider?
 // Start game/restart game buttons. This would be nice when playing with friends, so CHECK
 // I don't think a leaderboard would be necessary. Correct, leaderboard unnecessary, so NIX
 // No need to have a highscore setting. Correct, highscore unnecessary, so NIX
 // I could work on having interchangeable backgrounds, that would be a good addition to this project that could help me in other projects. This might be difficult, but I'll try, so CHECK
-
-let a = Math.random() * canvas.width;
-let b = Math.random() * canvas.height;
-
-let dx = 2;
-let dy = 2;
-
-let radius = 10
-
-const drawCircle = (x, y) => {
-    // arc
-    console.log('click')
-    ctx.beginPath();
-    ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
-    ctx.fillStyle = 'red';
-    ctx.fill();
-};
-
-const handleDrawing = (event) => {
-    a = 250;
-    b = 250;
-}
-
-const animate = () => {
-    ctx.clearRect(0,0,canvas.width,canvas.height)
-    requestAnimationFrame(animate);
-
-    if (a + radius > canvas.width || a - radius < 0) {
-        dx = -dx;
-    } else if (b + radius > canvas.height || b - radius < 0) {
-        dy = -dy;
-    }
-
-    drawCircle(a, b);
-    a = a + dx;
-    b = b + dy;
-}
-
-animate()
-canvas.addEventListener('click', handleDrawing);
-
-
-
-
