@@ -157,36 +157,27 @@ function drawScore() {
 
 };
 
+document.body.addEventListener('keydown', keyDown);
+
 function keyDown() {
+    console.log('working?');
     // left player keys (player 1)
     // up key for player 1
     if (event.keyCode === 87) {
-        if (lPlayerVelocity === 1) {
-            return;
-        }
         lPlayerVelocity = -1;
     }
     // down key for player 1
     if (event.keyCode === 83) {
-        if (lPlayerVelocity === -1) {
-            return;
-        }
         lPlayerVelocity = 1;
     }
 
     // right player keys (player 2)
     // up key for player 2
     if (event.keyCode === 38) {
-        if (rPlayerVelocity === 1) {
-            return;
-        }
         rPlayerVelocity = -1;
     }
     // down key for player 2
     if (event.keyCode === 40) {
-        if (rPlayerVelocity === -1) {
-            return;
-        }
         rPlayerVelocity = 1;
     }
 };
