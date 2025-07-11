@@ -1,8 +1,5 @@
 // Mechanics of a pong game:
 // - Paddles
-//      - Move up and down
-//          - If keyUp = pressed {paddleVelocity = -1}; If keyDown = pressed {paddleVelocity = 1}
-//          - vars might be paddleVelocityL and paddleVelocityR for left and right players respectively
 //      - Ball bounces off paddles
 //          - If ballLocation = paddleLocation {velocityX * -1}
 // - Ball
@@ -25,26 +22,6 @@
 //          - scorerR = ballLocation <= leftWallEdge {scoreR++; restart(scorerR)}
 //          - function restart(scorer) {detect scorer; set velocityX to opposite direction; reset paddleLocation; startGame()}
 //              - function name restart or reset?
-//      - Score is first to 7
-//          - If scoreL === 7 {endGame()}
-//          - If scoreR === 7 {endGame()}
-
-// left player vars
-/*
-let playerLeft = "";
-*/
-
-// right player vars
-/*
-let playerRight = "";
-*/
-
-// functions
-/*
-endGame();
-resetGame();
-drawScore(); maybe combine this with a different function?
-*/
 
 // pull canvas information from html
 const canvas = document.getElementById('game');
@@ -64,8 +41,8 @@ let lPlayerScore = 0;
 let rPlayerScore = 0;
 
 // ball stuff
-let ballX = 5;
-let ballY = 5;
+let ballX = 250;
+let ballY = 250;
 
 let ballVelocityX = 0;
 let ballVelocityY = 0;
@@ -88,7 +65,7 @@ function drawGame() {
 
     // checks to see if game is over; ends function if it is game over
     let result = endGame();
-    if(result) {
+    if (result) {
         return;
     }
 
@@ -115,24 +92,24 @@ function changePaddlePosition() {
 function endGame() {
     let winner = '';
     // checks to see if the game has started yet
-    if(lPlayerScore === 0 && rPlayerScore === 0) {
+    if (lPlayerScore === 0 && rPlayerScore === 0) {
         return false;
     }
 
     // check if a player has reached 7 points
-    if(lPlayerScore === 7) {
+    if (lPlayerScore === 7) {
         // lPlayer win screen
         winner = 'Player 1';
         gameOver = true;
     }
 
-    if(rPlayerScore === 7) {
+    if (rPlayerScore === 7) {
         // rPlayer win screen
         winner = 'Player 2';
         gameOver = true;
     }
 
-    if(gameOver) {
+    if (gameOver) {
         ctx.fillStyle = 'black';
         ctx.font = '50px "Lucida Console"';
         let winnerMessage = winner + ' wins!';
@@ -151,44 +128,44 @@ function clearScreen() {
 
 function checkCollision() {
     // ball hits walls
-    if(ballY === 0 || ballY === 10) {
+    if (ballY === 0 || ballY === 10) {
         ballVelocityY * -1;
     }
 
     // left player collisions
     // ball hits left paddle
-    if(ballX === lPaddleX && ballY === lPaddleY) {
+    if (ballX === lPaddleX && ballY === lPaddleY) {
         ballVelocityX = 1;
     }
     // left paddle hits walls
-    if(lPaddleY < 0) {
+    if (lPaddleY < 0) {
         lPaddleY = 0;
         lPlayerVelocity = 0;
-    } else if(lPaddleY >= 8) {
+    } else if (lPaddleY >= 8) {
         lPaddleY = 8;
         lPlayerVelocity = 0;
     }
     // left player scores
-    if(ballX === 50) {
+    if (ballX === 50) {
         // set ball back to center screen
         // launch ball towards right player
         lPlayerScore++;
-    } 
+    }
 
     // ball hits right paddle
-    if(ballX === rPaddleX && ballY === rPaddleY) {
+    if (ballX === rPaddleX && ballY === rPaddleY) {
         ballVelocityX = -1;
     }
     // left paddle hits walls
-    if(rPaddleY < 0) {
+    if (rPaddleY < 0) {
         rPaddleY = 0;
         rPlayerVelocity = 0;
-    } else if(rPaddleY >= 8) {
+    } else if (rPaddleY >= 8) {
         rPaddleY = 8;
         rPlayerVelocity = 0;
     }
     // right player scores
-    if(ballX === 0) {
+    if (ballX === 0) {
         // set ball back to center screen
         // launch ball towards left player
         rPlayerScore++
@@ -197,8 +174,12 @@ function checkCollision() {
 
 // function to draw the ball onto the canvas
 function drawBall() {
-    ctx.fillStyle = 'black';
-    ctx.fillRect(ballX * tileCount, ballY * tileCount, tileSize, tileSize);
+    // ctx.fillStyle = 'black';
+    // ctx.fillRect(ballX * tileCount, ballY * tileCount, tileSize, tileSize);
+    ctx.beginPath();
+    ctx.arc(ballX, ballY, 7, 0, 2 * Math.PI, false);
+    ctx.fillStyle = 'black'
+    ctx.fill()
 };
 
 function drawPaddles() {
@@ -245,10 +226,54 @@ function keyDown() {
 };
 
 // drawGame as master function
-drawGame();
+// drawGame();
 
 // What other game elements should I consider?
 // Start game/restart game buttons. This would be nice when playing with friends, so CHECK
 // I don't think a leaderboard would be necessary. Correct, leaderboard unnecessary, so NIX
 // No need to have a highscore setting. Correct, highscore unnecessary, so NIX
 // I could work on having interchangeable backgrounds, that would be a good addition to this project that could help me in other projects. This might be difficult, but I'll try, so CHECK
+
+let a = Math.random() * canvas.width;
+let b = Math.random() * canvas.height;
+
+let dx = 2;
+let dy = 2;
+
+let radius = 10
+
+const drawCircle = (x, y) => {
+    // arc
+    console.log('click')
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
+    ctx.fillStyle = 'red';
+    ctx.fill();
+};
+
+const handleDrawing = (event) => {
+    a = 250;
+    b = 250;
+}
+
+const animate = () => {
+    ctx.clearRect(0,0,canvas.width,canvas.height)
+    requestAnimationFrame(animate);
+
+    if (a + radius > canvas.width || a - radius < 0) {
+        dx = -dx;
+    } else if (b + radius > canvas.height || b - radius < 0) {
+        dy = -dy;
+    }
+
+    drawCircle(a, b);
+    a = a + dx;
+    b = b + dy;
+}
+
+animate()
+canvas.addEventListener('click', handleDrawing);
+
+
+
+
