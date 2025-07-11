@@ -143,6 +143,7 @@ function endGame() {
     return gameOver;
 }
 
+// sets the background of the canvas
 function clearScreen() {
     ctx.fillStyle = customGradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -194,19 +195,23 @@ function checkCollision() {
     }
 };
 
+// function to draw the ball onto the canvas
 function drawBall() {
     ctx.fillStyle = 'black';
     ctx.fillRect(ballX * tileCount, ballY * tileCount, tileSize, tileSize);
 };
 
 function drawPaddles() {
+    // draws the left player paddle onto the canvas
     ctx.fillStyle = 'black';
     ctx.fillRect(lPaddleX * tileCount, lPaddleY * tileCount, tileSize, tileSize * 11)
 
+    // draws the right player paddle onto the canvas
     ctx.fillStyle = 'black';
     ctx.fillRect(rPaddleX * tileCount, rPaddleY * tileCount, tileSize, tileSize * 11)
 };
 
+// function to draw score onto canvas
 function drawScore() {
     ctx.fillStyle = 'black';
     ctx.font = '30px "Lucida Console"';
